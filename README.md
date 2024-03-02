@@ -1,3 +1,4 @@
+![Last Build](https://github.com/cburgosro9303/zium/actions/workflows/gradle.yml/badge.svg?branch=master)
 # Proyecto Base Implementando Clean Architecture
 
 ## Antes de Iniciar
