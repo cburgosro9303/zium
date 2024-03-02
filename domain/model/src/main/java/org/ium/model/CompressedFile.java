@@ -3,7 +3,11 @@ package org.ium.model;
 import java.util.Map;
 
 public record CompressedFile(
-        String base64,
-        Map<String, Object> metadata
+        byte[] base64,
+        Map<FileCompressionMetadata, String> metadata
 ) {
+
+    public enum FileCompressionMetadata {
+        OLD_BYTES, NEW_BYTES
+    }
 }
