@@ -1,6 +1,8 @@
 package org.ium.api.util;
 
 import lombok.experimental.UtilityClass;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.nio.ByteBuffer;
 import java.util.List;
@@ -8,26 +10,24 @@ import java.util.List;
 @UtilityClass
 public class BytesUtil {
 
-    public static byte[] convert(List<ByteBuffer> buffers) {
-        // Primero, calculamos el tamaño total requerido para el arreglo de bytes
-        int totalLength = 0;
-        for (ByteBuffer buffer : buffers) {
-            totalLength += buffer.remaining();
-        }
+    public static Mono<byte[]> convert(List<ByteBuffer> buffers) {
+        return Mono.fromCallable(() -> {
+                    int totalLength = 0;
+                    for (ByteBuffer buffer : buffers) {
+                        totalLength += buffer.remaining();
+                    }
 
-        // Creamos un arreglo de bytes con el tamaño total
-        byte[] result = new byte[totalLength];
+                    byte[] result = new byte[totalLength];
+                    int currentPosition = 0;
 
-        // Variable para mantener la posición actual de escritura en el arreglo de bytes
-        int currentPosition = 0;
+                    for (ByteBuffer buffer : buffers) {
+                        int length = buffer.remaining();
+                        buffer.get(result, currentPosition, length);
+                        currentPosition += length;
+                    }
 
-        // Luego, copiamos cada ByteBuffer en el arreglo de bytes
-        for (ByteBuffer buffer : buffers) {
-            int length = buffer.remaining();
-            buffer.get(result, currentPosition, length);
-            currentPosition += length;
-        }
-
-        return result;
+                    return result;
+                })
+                .subscribeOn(Schedulers.boundedElastic());
     }
 }

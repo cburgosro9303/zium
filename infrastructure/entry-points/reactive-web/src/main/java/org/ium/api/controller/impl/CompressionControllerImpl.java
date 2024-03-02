@@ -25,12 +25,12 @@ public class CompressionControllerImpl implements CompressionController {
     private final CompressionPort compressionPort;
 
     @PostMapping(consumes = MediaType.ALL_VALUE)
-    public Mono<ResponseEntity<CompressedFileDto>> compress(@RequestPart("file") FilePart file,
+    public Mono<ResponseEntity<CompressedFileDto>> compress(@RequestPart("file") FilePart filepart,
                                                             @RequestPart("compressionLevel") String compressionLevel) {
-        return file.content()
+        return filepart.content()
                 .flatMapSequential(dataBuffer -> Flux.fromIterable(dataBuffer::readableByteBuffers))
                 .collectList()
-                .map(BytesUtil::convert)
+                .flatMap(BytesUtil::convert)
                 .map(byteBuffer -> new FileToCompress(byteBuffer, Integer.parseInt(compressionLevel)))
                 .flatMap(compressionPort::compress)
                 .map(CompressMapper.INSTANCE::toDto)
