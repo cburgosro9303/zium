@@ -4,7 +4,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'Zium'
+rootProject.name = 'zium'
 
 include ':app-service'
 include ':model'
