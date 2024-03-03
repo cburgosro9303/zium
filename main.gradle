@@ -79,5 +79,5 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 tasks.named('wrapper') {
-    gradleVersion = '8.5'
+    gradleVersion = '8.6'
 }

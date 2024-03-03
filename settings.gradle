@@ -3,7 +3,6 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-
 plugins {
     id("com.gradle.enterprise") version("3.16.1")
 }
@@ -18,7 +17,7 @@ gradleEnterprise {
     }
 }
 
-rootProject.name = 'Zium'
+rootProject.name = 'zium'
 
 include ':app-service'
 include ':model'
