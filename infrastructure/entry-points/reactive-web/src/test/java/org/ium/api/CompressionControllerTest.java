@@ -4,6 +4,7 @@ import org.ium.api.controller.impl.CompressionControllerImpl;
 import org.ium.model.CompressedFile;
 import org.ium.model.FileToCompress;
 import org.ium.model.port.CompressionPort;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,7 @@ import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
+import reactor.blockhound.BlockHound;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
@@ -36,6 +38,7 @@ class CompressionControllerTest {
 
     @MockBean
     CompressionPort compressionPort;
+
 
     @BeforeEach
     public void setUp() {
