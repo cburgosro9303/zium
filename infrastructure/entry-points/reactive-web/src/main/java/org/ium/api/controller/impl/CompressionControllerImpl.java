@@ -20,22 +20,21 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/compress")
-public class CompressionControllerImpl implements CompressionController {
+public class CompressionControllerImpl {
 
     private final CompressionPort compressionPort;
 
     @PostMapping(consumes = MediaType.ALL_VALUE)
-    public Mono<ResponseEntity<CompressedFileDto>> compress(@RequestPart("file") FilePart filepart,
+    public Mono<ResponseEntity<CompressedFileDto>> compress(@RequestPart("file") Mono<FilePart> filepart,
                                                             @RequestPart("compressionLevel") String compressionLevel) {
-        return filepart.content()
-                .flatMapSequential(dataBuffer -> Flux.fromIterable(dataBuffer::readableByteBuffers))
-                .collectList()
-                .flatMap(BytesUtil::convert)
-                .map(byteBuffer -> new FileToCompress(byteBuffer, Integer.parseInt(compressionLevel)))
+        return filepart
+                .flatMap(file -> file.content()
+                        .flatMapSequential(dataBuffer -> Flux.fromIterable(dataBuffer::readableByteBuffers))
+                        .collectList()
+                        .flatMap(BytesUtil::convert)
+                        .map(byteBuffer -> new FileToCompress(byteBuffer, Integer.parseInt(compressionLevel))))
                 .flatMap(compressionPort::compress)
                 .map(CompressMapper.INSTANCE::toDto)
                 .map(ResponseEntity::ok);
     }
-
-
 }
