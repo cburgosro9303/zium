@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: "Zium"
+    name: "zium"
   devtools:
     add-properties: false
   h2:
@@ -22,3 +22,8 @@ management:
         enabled: true
 cors:
   allowed-origins: "http://localhost:4200,http://localhost:8080"
+logging:
+  level:
+    root: info
+    org.ium: trace
+    web: debug

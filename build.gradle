@@ -32,4 +32,10 @@ sonar {
     }
 }
 
+cleanPlugin {
+    modelProps {
+        whitelistedDependencies = "zstd-jni"
+    }
+}
+
 apply from: './main.gradle'
