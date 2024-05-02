@@ -19,8 +19,8 @@ subprojects {
     dependencies {
         implementation 'io.projectreactor:reactor-core'
         implementation 'io.projectreactor.addons:reactor-extra'
+        implementation 'org.apache.commons:commons-compress:${commonCompressVersion}'
 
-        testImplementation 'io.projectreactor.tools:blockhound-junit-platform:1.0.8.RELEASE'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
         testImplementation 'io.projectreactor:reactor-test'
@@ -79,5 +79,5 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 tasks.named('wrapper') {
-    gradleVersion = '8.6'
+    gradleVersion = '8.7'
 }
