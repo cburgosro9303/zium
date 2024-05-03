@@ -4,6 +4,7 @@ import org.ium.api.controller.impl.CompressionControllerImpl;
 import org.ium.model.CompressedFile;
 import org.ium.model.FileToCompress;
 import org.ium.model.port.CompressionPort;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,6 +37,7 @@ class CompressionControllerTest {
 
     @MockBean
     CompressionPort compressionPort;
+
 
     @BeforeEach
     public void setUp() {
