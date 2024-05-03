@@ -62,3 +62,11 @@ encontraremos la funci�n �public static void main(String[] args)�.
 gradle ca --package=org.ium --type=reactive --name=zium --coverage=jacoco --lombok=true --metrics=false --javaVersion=VERSION_21
 gradle gep --type webflux --router false --authorization false
 ```
+## cURL 
+
+
+```shell
+curl --location 'http://localhost:8080/compress' \
+--form 'compressionLevel="100"' \
+--form 'file=@"---"'
+```
