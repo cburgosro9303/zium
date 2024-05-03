@@ -19,7 +19,7 @@ subprojects {
     dependencies {
         implementation 'io.projectreactor:reactor-core'
         implementation 'io.projectreactor.addons:reactor-extra'
-        implementation 'org.apache.commons:commons-compress:${commonCompressVersion}'
+        implementation "org.apache.commons:commons-compress:${commonCompressVersion}"
 
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
