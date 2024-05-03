@@ -35,7 +35,7 @@ sonar {
 
 cleanPlugin {
     modelProps {
-        whitelistedDependencies = "zstd-jni"
+        whitelistedDependencies = "zstd-jni,commons-compress"
     }
 }
 
